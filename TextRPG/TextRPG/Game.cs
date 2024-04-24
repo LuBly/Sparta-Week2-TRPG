@@ -74,19 +74,7 @@
 
         void LoadStatusMenu()
         {
-            Console.WriteLine("[상태 보기]");
-            // Lv
-            Console.WriteLine($"Lv. {player.level}");
-            // 직업
-            Console.WriteLine($"Chad : {player.classType}");
-            // 공격력
-            Console.WriteLine($"공격력 : {player.attackPower}");
-            // 방어력
-            Console.WriteLine($"방어력 : {player.defensePower}");
-            // 체력
-            Console.WriteLine($"체 력 : {player.health}");
-            // 소유 gold
-            Console.WriteLine($"Gold : {player.health}");
+            player.ShowStatus();
             
             Console.WriteLine("\n0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -96,10 +84,10 @@
 
         void LoadInventoryMenu()
         {
-            Console.WriteLine("[상태 보기]");
-            Console.WriteLine("상태 BlaBla");
+            
+            player.inventory.ShowInventory();
 
-            Console.WriteLine("0. 나가기");
+            Console.WriteLine("\n0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">> ");
             curMenu = (Menu)int.Parse(Console.ReadLine());
