@@ -75,8 +75,7 @@
         void LoadStatusMenu()
         {
             player.ShowStatus();
-            
-            Console.WriteLine("\n0. 나가기\n");
+            Console.WriteLine("\n0. 나가기");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">> ");
             curMenu = (Menu)int.Parse(Console.ReadLine());
@@ -84,13 +83,36 @@
 
         void LoadInventoryMenu()
         {
-            
+            // Inventory 초기 화면
             player.inventory.ShowInventory();
 
-            Console.WriteLine("\n0. 나가기\n");
+            // while문이 구지 있어야 할까?
+            // 
+            while (true)
+            {
+                bool isContinue = true;
+                int choiceIdx = int.Parse(Console.ReadLine());
+                switch (choiceIdx)
+                {
+                    case 0:
+                        isContinue = false;
+                        curMenu = 0;
+                        break;
+                    case 1:
+                        LoadEquipMenu();
+                        break;
+                }
+
+                if (!isContinue) break;
+            }
+        }
+
+        void LoadEquipMenu()
+        {
+            player.inventory.EquipInventory(player);
+            Console.WriteLine("\n0. 나가기");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">> ");
-            curMenu = (Menu)int.Parse(Console.ReadLine());
         }
 
         void LoadStoreMenu()

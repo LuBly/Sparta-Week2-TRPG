@@ -14,10 +14,13 @@ namespace TextRPG
         public string name { get; set; }
         public CreatureType classType { get; set; }
         public int attackPower { get; set; }
+        public int increaseAttack;
         public int defensePower { get; set; }
+        public int increaseDefense;
         public int health { get; set; }
         
         public int gold;
+        
         public Inventory inventory = new Inventory();
         public Player()
         {
@@ -38,9 +41,25 @@ namespace TextRPG
             // 직업
             Console.WriteLine($"Chad : {classType}");
             // 공격력
-            Console.WriteLine($"공격력 : {attackPower}");
+            Console.Write($"공격력 : {attackPower}");
+            if(increaseAttack > 0)
+            {
+                Console.WriteLine($" + ({increaseAttack})");
+            }
+            else
+            {
+                Console.WriteLine();
+            }
             // 방어력
-            Console.WriteLine($"방어력 : {defensePower}");
+            Console.Write($"방어력 : {defensePower}");
+            if (increaseDefense > 0)
+            {
+                Console.WriteLine($" + ({increaseDefense})");
+            }
+            else
+            {
+                Console.WriteLine();
+            }
             // 체력
             Console.WriteLine($"체 력 : {health}");
             // 소유 gold
