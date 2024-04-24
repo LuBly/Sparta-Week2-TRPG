@@ -107,6 +107,7 @@
             }
         }
 
+        // 인벤토리 세부 매뉴
         void LoadEquipMenu()
         {
             player.inventory.EquipInventory(player);
