@@ -119,8 +119,13 @@
                 else
                 {
                     Item curItem = storeInventory.ChooceItem(choiceIdx - 1);
+                    // 이미 구매한 아이템이라면
+                    if (curItem.isUsable)
+                    {
+                        Console.WriteLine($"이미 구매한 아이템입니다.");
+                    }
                     // 장비 가격보다 보유 gold가 많으면 add
-                    if (player.gold >= curItem.price)
+                    else if (player.gold >= curItem.price)
                     {
                         curItem.isUsable = true;
                         player.gold -= curItem.price;
