@@ -83,6 +83,7 @@ namespace TextRPG
             Console.WriteLine("\n[탐험 결과]");
             Console.WriteLine($"체력 {player.health} -> {ChangeHealth(player)}");
             Console.WriteLine($"골드 {player.gold} -> {ChangeGold(player)}");
+            player.EditLevel();
         }
 
         void StageFail(Player player)
@@ -98,15 +99,15 @@ namespace TextRPG
         }
 
         // hp 변화량 계산
-        int ChangeHealth(Player player)
+        float ChangeHealth(Player player)
         {
             // 기본 체력 감소량
             Random random = new Random();
             // 20 ~ 35 랜덤
-            int minusHp = random.Next(20, 36);
-            int playerDeffence = player.defensePower + player.increaseDefense;
-            int changeValue = playerDeffence - RecommendedDefense;
-            int damage = minusHp + changeValue;
+            float minusHp = random.Next(20, 36);
+            float playerDeffence = player.defensePower + player.increaseDefense;
+            float changeValue = playerDeffence - RecommendedDefense;
+            float damage = minusHp + changeValue;
             player.health -= damage;
             
             return player.health;
@@ -116,8 +117,8 @@ namespace TextRPG
         float ChangeGold(Player player)
         {
             Random random = new Random();
-            int playerAttack = player.attackPower + player.increaseAttack;
-            int plusGoldRate = random.Next(playerAttack, playerAttack*2);
+            float playerAttack = player.attackPower + player.increaseAttack;
+            int plusGoldRate = random.Next((int)playerAttack, (int)playerAttack*2);
             ClearReward += ClearReward * (plusGoldRate / 100f);
             player.gold += ClearReward;
             return player.gold;

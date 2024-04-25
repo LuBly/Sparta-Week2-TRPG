@@ -11,8 +11,8 @@
     {
         string name { get; set; }
         CreatureType classType { get; set; }
-        int attackPower { get; set; }
-        int defensePower { get; set; }
-        int health { get; set; }
+        float attackPower { get; set; }
+        float defensePower { get; set; }
+        float health { get; set; }
     }
 }
