@@ -13,24 +13,30 @@ namespace TextRPG
     internal class Item
     {
         public bool isEquiped = false;
+        public bool isUsable = false;
         public string name;
+        public int price;
 
         ItemType itemType;
         int increase;
         string description;
-
+        
         // DB에서 모든 아이템을 생성하고 메모리에 올려두고 있을까?
             // 데이터를 배열화해서 모두 new하고 만들어 놓기
         // 아니면 필요할 때마다 배열에 접근해서 가져오기
-        public Item(string name, ItemType itemType, int increase, string description)
+        public Item(string name, ItemType itemType, int increase, string description, int price)
         {
             this.name = name;
             this.itemType = itemType;
             this.increase = increase;
             this.description = description;
+            this.price = price;
         }
-
-        public void ShowItem()
+        /// <summary>
+        /// MenuType에 따른 Item 표현 방식을 구분
+        /// </summary>
+        /// <param name="menuType"></param>
+        public void ShowItem(Menu menuType)
         {
             int originRow = Console.CursorTop;
             // 장착중인 아이템이라면 인벤토리에 [E] 표시
@@ -45,16 +51,28 @@ namespace TextRPG
             switch (itemType)
             {
                 case ItemType.Weapon:
-                    Console.Write($"| 공격력 + {increase} |");
+                    Console.Write($"| 공격력 + {increase} ");
                     break;
                 case ItemType.Armor:
-                    Console.Write($"| 방어력 + {increase} |");
+                    Console.Write($"| 방어력 + {increase} ");
                     break;
 
             }
             // 설명
             Console.SetCursorPosition(35, originRow);
-            Console.WriteLine($"{description}");
+            Console.WriteLine($"| {description}");
+
+            // 스토어에서 구매 및 판매결정을 할 때만 해당 내용 출력
+            if(menuType == Menu.store)
+            {
+                Console.SetCursorPosition(100, originRow);
+                if (isUsable)
+                {
+                    Console.WriteLine("| 구매완료");
+                }
+                else
+                    Console.WriteLine($"| {price} G");
+            }
         }
 
         public void EquipItem(Player player)

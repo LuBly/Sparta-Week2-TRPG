@@ -1,18 +1,31 @@
 ﻿namespace TextRPG
 {
+    public enum InventoryType
+    {
+        noneIdx,
+        idx,
+    }
     internal class Inventory
     {
         // inventory에 보유하고 있는 아이템 
-        List<Item> items = new List<Item>();
+        List<Item> inventoryItems = new List<Item>();
         bool isIn = false;
 
+        public int CountInventory()
+        {
+            return inventoryItems.Count;
+        }
         public void AddItem(Item item)
         {
-            items.Add(item);
+            inventoryItems.Add(item);
         }
-
+        public Item ChooceItem(int index)
+        {
+            return inventoryItems[index];
+        }
         public void ShowInventory()
         {
+            /*
             // [For Dev]
             if (!isIn)
             {
@@ -24,16 +37,12 @@
                 AddItem(tempItem3);
                 isIn = true;
             }
+            */
+            ShowItemList(InventoryType.noneIdx, Menu.inventory);
 
-            Console.WriteLine("[아이템 목록]");
-            // 일반 메뉴일때
-            foreach(Item item in items)
-            {
-                Console.Write($"- ");
-                item.ShowItem();
-            }
             Console.WriteLine();
-            Console.WriteLine("\n1. 장착관리");
+            Console.WriteLine();
+            Console.WriteLine("1. 장착관리");
             Console.WriteLine("0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">> ");
@@ -48,20 +57,13 @@
                 // 기존 Inventory 내용 삭제
                 Console.Clear();
 
-                Console.WriteLine("\n[아이템 목록]");
-
-                // 아이템 리스트 표기
-                for (int i = 0; i < items.Count; i++)
-                {
-                    Console.Write($"- {i + 1} ");
-                    items[i].ShowItem();
-                }
+                ShowItemList(InventoryType.idx, Menu.inventory);
 
                 Console.WriteLine("\n장착할 장비를 선택해주세요.(0 : 뒤로가기)");
                 Console.Write(">> ");
                 int equipIdx = int.Parse(Console.ReadLine());
                 // 범위 밖의 번호를 선택했을 때
-                if (equipIdx > items.Count || equipIdx < 0) 
+                if (equipIdx > inventoryItems.Count || equipIdx < 0) 
                 {
                     Console.WriteLine("잘못된 입력입니다.");
                     continue;
@@ -76,13 +78,27 @@
                 else
                 {
                     // 장비 장착 및 해제
-                    items[equipIdx - 1].EquipItem(player);
+                    inventoryItems[equipIdx - 1].EquipItem(player);
                 }
 
                 // 약간의 Delay 부여
                 Thread.Sleep(500);
             }
+        }
 
+        // ItemList 출력
+        public void ShowItemList(InventoryType type, Menu menuType)
+        {
+            Console.WriteLine("\n[아이템 목록]");
+
+            // 아이템 리스트 표기
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {
+                Console.Write("- ");
+                if(type == InventoryType.idx)
+                    Console.Write($"{i + 1} ");
+                inventoryItems[i].ShowItem(menuType);
+            }
         }
     }
 }

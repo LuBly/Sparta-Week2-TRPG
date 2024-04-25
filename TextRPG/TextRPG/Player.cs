@@ -30,7 +30,7 @@ namespace TextRPG
             attackPower = 10;
             defensePower = 5;
             health = 100;
-            gold = 1500;
+            gold = 150000;
         }
 
         public void ShowStatus()

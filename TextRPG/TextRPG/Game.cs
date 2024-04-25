@@ -1,5 +1,12 @@
 ﻿namespace TextRPG
 {
+    public enum Menu
+    {
+        start,
+        status,
+        inventory,
+        store
+    }
     public class Game
     {
         /// <summary>
@@ -12,18 +19,14 @@
         /// ++
         /// 4 = 던전 입장 화면
         /// </summary>
-        enum Menu
-        {
-            start,
-            status,
-            inventory,
-            store
-        }
+        
         // 초기 화면 설정(맨 처음 실행됐을 때)
         Menu curMenu = Menu.start;
-
         // Player 생성 (임의 생성)
         Player player = new Player();
+
+        // Store 생성
+        Store store = new Store();
 
         public void StartGame()
         {
@@ -85,9 +88,6 @@
         {
             // Inventory 초기 화면
             player.inventory.ShowInventory();
-
-            // while문이 구지 있어야 할까?
-            // 
             while (true)
             {
                 bool isContinue = true;
@@ -118,13 +118,27 @@
 
         void LoadStoreMenu()
         {
-            Console.WriteLine("[상태 보기]");
-            Console.WriteLine("상태 BlaBla");
+            store.ShowStore(player);
+            while (true)
+            {
+                bool isContinue = true;
+                int choiceIdx = int.Parse(Console.ReadLine());
+                switch (choiceIdx)
+                {
+                    case 0:
+                        isContinue = false;
+                        curMenu = 0;
+                        break;
+                    case 1:
+                        store.UseStore(1, player);
+                        break;
+                    case 2:
+                        store.UseStore(2, player);
+                        break;
+                }
 
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
-            curMenu = (Menu)int.Parse(Console.ReadLine());
+                if (!isContinue) break;
+            }
         }
     }
 }
