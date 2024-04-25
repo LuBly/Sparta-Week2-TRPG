@@ -38,6 +38,8 @@
                 isIn = true;
             }
             */
+            Console.Clear();
+
             ShowItemList(InventoryType.noneIdx, Menu.inventory);
 
             Console.WriteLine();
@@ -66,12 +68,13 @@
                 if (equipIdx > inventoryItems.Count || equipIdx < 0) 
                 {
                     Console.WriteLine("잘못된 입력입니다.");
+                    Thread.Sleep(500);
                     continue;
                 }
                 // 0을 선택했을 때
                 else if(equipIdx == 0)
                 {
-                    Console.WriteLine("\n================<뒤로가기>================");
+                    ShowInventory();
                     break;
                 }
                 // 장비를 선택했을 때
