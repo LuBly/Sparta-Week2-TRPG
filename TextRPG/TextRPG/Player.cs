@@ -18,9 +18,10 @@ namespace TextRPG
         public int defensePower { get; set; }
         public int increaseDefense;
         public int health { get; set; }
-        
         public float gold;
-        
+        public Item Waepon, Armor;
+
+
         public Inventory inventory = new Inventory();
         public Player()
         {

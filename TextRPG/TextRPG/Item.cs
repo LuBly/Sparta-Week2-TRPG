@@ -79,10 +79,37 @@ namespace TextRPG
         {
             switch (itemType)
             {
+                // 무기 장착
                 case ItemType.Weapon:
-                    player.increaseAttack = increase;           
+                    // 장착된 오브젝트가 있다면 교체
+                    if(player.Waepon != null)
+                    {
+                        // 기존 장착 무기 장착 해제
+                        player.Waepon.isEquiped = false;
+
+                        // 기존 장착 무기 장착 해제
+                        player.Waepon = this;
+                        break;
+                    }
+                    // 장착된 오브젝트가 없다면 장착
+                    else
+                    {
+                        player.Waepon = this;
+                        player.increaseAttack = increase;
+                    }
                     break;
                 case ItemType.Armor:
+                    // 장착된 오브젝트가 있다면 교체
+                    if (player.Armor != null)
+                    {
+                        // 기존 장착 무기 장착 해제
+                        player.Armor.isEquiped = false;
+
+                        // 기존 장착 무기 장착 해제
+                        player.Armor = this;
+                        break;
+                    }
+                    player.Armor = this;
                     player.increaseDefense = increase;
                     break;
             }
