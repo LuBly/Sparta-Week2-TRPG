@@ -6,7 +6,8 @@
         status,
         inventory,
         store,
-        dungeon
+        dungeon,
+        rest,
     }
     public class Game
     {
@@ -32,6 +33,9 @@
 
         // 던전 생성
         Dungeon dungeon = new Dungeon();
+
+        // 휴식장소 생성
+        Park park = new Park();
 
         public void StartGame()
         {
@@ -62,7 +66,9 @@
                     case Menu.dungeon:
                         LoadDungeonMenu();
                         break;
-
+                    case Menu.rest:
+                        LoadRestMenu();
+                        break;
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
                         curMenu = Menu.start;
@@ -78,7 +84,7 @@
             Console.WriteLine("안녕?");
             Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 정할 수 있어\n");
 
-            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전입장");
+            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전입장\n5. 휴식하기");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">> ");
             curMenu = (Menu)int.Parse(Console.ReadLine());
@@ -146,6 +152,7 @@
                 if (!isContinue) break;
             }
         }
+
         void LoadDungeonMenu()
         {
             dungeon.ShowDungeon();
@@ -165,6 +172,21 @@
                 }
 
                 if(!isContinue) break;
+            }
+        }
+
+        void LoadRestMenu()
+        {
+            park.ShowRestPlace(player);
+            int choiceIdx = int.Parse(Console.ReadLine());
+            switch (choiceIdx)
+            {
+                case 0:
+                    curMenu = 0;
+                    break;
+                case 1:
+                    park.HealHp(player);
+                    break;
             }
         }
     }
