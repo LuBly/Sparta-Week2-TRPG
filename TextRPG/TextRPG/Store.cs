@@ -55,15 +55,6 @@
             Console.Write(">> ");
         }
 
-        // 구매 (+ 판매)
-        // type 1 = 구매
-        // type 2 = 판매
-        // inventory불러오기
-        // 비슷한 기능을 하는 함수들이 있는데, 얘네를 묶어? 풀어?
-        // 묶자니 세부조건(store인지, inventory인지)들이 필요하고, 풀자니 겹치는게 많고.
-        // 안내창class를(싱글톤으로 제작해서) 따로 빼서 관리
-        // 0 >> 나가기는 
-
         public void UseStore(int type, Player player)
         {
             switch(type)

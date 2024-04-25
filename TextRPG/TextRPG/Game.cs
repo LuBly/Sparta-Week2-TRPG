@@ -5,7 +5,8 @@
         start,
         status,
         inventory,
-        store
+        store,
+        dungeon
     }
     public class Game
     {
@@ -22,11 +23,15 @@
         
         // 초기 화면 설정(맨 처음 실행됐을 때)
         Menu curMenu = Menu.start;
+
         // Player 생성 (임의 생성)
         Player player = new Player();
 
         // Store 생성
         Store store = new Store();
+
+        // 던전 생성
+        Dungeon dungeon = new Dungeon();
 
         public void StartGame()
         {
@@ -54,6 +59,10 @@
                         LoadStoreMenu();
                         break;
 
+                    case Menu.dungeon:
+                        LoadDungeonMenu();
+                        break;
+
                     default:
                         Console.WriteLine("잘못된 입력입니다.");
                         curMenu = Menu.start;
@@ -69,7 +78,7 @@
             Console.WriteLine("안녕?");
             Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 정할 수 있어\n");
 
-            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점");
+            Console.WriteLine("1. 상태 보기\n2. 인벤토리\n3. 상점\n4. 던전입장");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">> ");
             curMenu = (Menu)int.Parse(Console.ReadLine());
@@ -135,6 +144,27 @@
                 }
 
                 if (!isContinue) break;
+            }
+        }
+        void LoadDungeonMenu()
+        {
+            dungeon.ShowDungeon();
+            while (true)
+            {
+                bool isContinue = true;
+                int choiceIdx = int.Parse(Console.ReadLine());
+                switch (choiceIdx)
+                {
+                    case 0:
+                        isContinue = false;
+                        curMenu = 0;
+                        break;
+                    default:
+                        dungeon.ShowStage(choiceIdx, player);
+                        break;
+                }
+
+                if(!isContinue) break;
             }
         }
     }

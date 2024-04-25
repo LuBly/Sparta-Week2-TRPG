@@ -46,9 +46,7 @@
 
             ShowItemList(InventoryType.noneIdx, Menu.inventory);
 
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("1. 장착관리");
+            Console.WriteLine("\n1. 장착관리");
             Console.WriteLine("0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">> ");
