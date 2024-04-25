@@ -85,7 +85,6 @@ namespace TextRPG
                 case ItemType.Armor:
                     player.increaseDefense = increase;
                     break;
-
             }
 
             // 장착 중일 때

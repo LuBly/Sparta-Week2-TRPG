@@ -19,6 +19,10 @@
         {
             inventoryItems.Add(item);
         }
+        public void RemoveItem(Item item)
+        {
+            inventoryItems.Remove(item);
+        }
         public Item ChooceItem(int index)
         {
             return inventoryItems[index];

@@ -19,7 +19,7 @@ namespace TextRPG
         public int increaseDefense;
         public int health { get; set; }
         
-        public int gold;
+        public float gold;
         
         public Inventory inventory = new Inventory();
         public Player()
@@ -30,7 +30,7 @@ namespace TextRPG
             attackPower = 10;
             defensePower = 5;
             health = 100;
-            gold = 150000;
+            gold = 150000f;
         }
 
         public void ShowStatus()
